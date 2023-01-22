@@ -10,10 +10,13 @@ function QuestionList() {
       .then ((data)=> setQuiz(data))
   },[])
 
+  function onDelete (Deleted) {
+    const deletedQuestion = quiz.filter ((query)=> query.id !== Deleted.id)
+    setQuiz (deletedQuestion)
+  }
+
   const quizList = quiz.map ((question)=> {
-    return <li key={question.id}>
-              {question.prompt}
-           </li>
+    return <>{<QuestionItem key={question.id} question={question} onDelete = {onDelete}/>}</>
   })
 
   return (
